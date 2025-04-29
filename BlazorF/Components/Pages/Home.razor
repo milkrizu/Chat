@@ -1,0 +1,106 @@
+﻿@page "/"
+@inject IJSRuntime JS
+@inject NavigationManager NavigationManager
+
+<style>
+    body {
+        background-image: url('https://images.wallpaperscraft.com/image/single/trees_slope_mountains_1002608_3840x2400.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100vh;
+        margin: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .welcome-container {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .welcome-title {
+        font-size: 5rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        color: white;
+        text-shadow: 3px 3px 0 #1e88e5, -1px -1px 0 #1e88e5, 1px -1px 0 #1e88e5, -1px 1px 0 #1e88e5, 1px 1px 0 #1e88e5;
+        letter-spacing: 2px;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+    }
+
+    .buttons-container {
+        padding-bottom: 50px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .gradient-btn {
+        padding: 15px 30px;
+        font-size: 20px;
+        font-weight: bold;
+        color: white;
+        background: linear-gradient(135deg, #1e88e5, #0d47a1);
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.3s;
+        box-shadow: 0 4px 15px rgba(30, 136, 229, 0.4);
+        text-decoration: none;
+        text-align: center;
+        min-width: 300px;
+    }
+
+        .gradient-btn:hover {
+            background: linear-gradient(135deg, #42a5f5, #1565c0);
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(30, 136, 229, 0.6);
+        }
+
+        .gradient-btn:active {
+            transform: translateY(1px);
+        }
+</style>
+
+<div class="welcome-container">
+    <h1 class="welcome-title">Welcome!</h1>
+</div>
+
+<div class="buttons-container">
+    <button type="button" class="gradient-btn" @onclick="NavigateToOtherPage">
+        Переход на Регистрацию/Вход
+    </button>
+
+    <NavLink class="gradient-btn" href="/counter">
+        Перейти на другую страницу
+    </NavLink>
+</div>
+
+@code {
+    private void NavigateToOtherPage()
+
+    {
+
+        ShowAlert("Переход в Авторизацию");
+
+        NavigationManager.NavigateTo("/counter");
+
+    }
+
+
+
+    private void ShowAlert(string message)
+
+    {
+
+        JS.InvokeVoidAsync("alert", message);
+
+    }
+}
